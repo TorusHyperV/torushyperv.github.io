@@ -121,12 +121,12 @@ Host: catalog.gamepass.com
 
 With this as the body:
 ```js
-{"Products":["BQ19FFKMQXXG"]}
+{"Products":["C4QM1R595G79"]}
 ```
 
 Alternatively, this other endpoint can be used too, although it requires authentication:
 ```js
-GET https://displaycatalog.mp.microsoft.com/v7.0/products?bigIds=9PP5G1F0C2B6&market=US&languages=en-US&fieldsTemplate=Details HTTP/1.1
+GET https://displaycatalog.mp.microsoft.com/v7.0/products?bigIds=C4QM1R595G79&market=US&languages=en-US&fieldsTemplate=Details HTTP/1.1
 Connection: Keep-Alive
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US
