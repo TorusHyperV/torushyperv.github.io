@@ -1,10 +1,10 @@
 # Scalebound Lost: a game preservation failure story
 
-<div align="center">
+ 
 
 ![Scalebound promo art](https://pbs.twimg.com/media/CrSkinfUsAENRtt?format=jpg&name=large)
 
-</div>
+ 
 
 > Scalebound was an action role-playing game developed by PlatinumGames from 2013 until its cancellation in 2017. It was scheduled to be released in 2017 for Windows and Xbox One, but Microsoft Studios announced its > cancellation in January 2017. In the game, players would assume control of Drew, who is accompanied by a dragon called Thuban. Players could use a variety of weapons to defeat enemies, and could issue commands to > the dragon, which assisted players during battles. Unlike other games developed by PlatinumGames, the game was to put more focus on graphical qualities and the role-playing aspect instead of action. 
 - [_Scalebound Wikipedia Article_](https://en.wikipedia.org/wiki/Scalebound)
@@ -21,11 +21,11 @@ As in all good missions, first step is reconnaissance and knowing what we want t
 
 An idea quickly sparkled in my head. If there is any place where a build of Scalebound might reside, that has to be Xbox Live servers. Like a needle in a haystack, I didn't know where to find it. So I started somewhere: reviewing Scalebound promotional video, E3 trailers, and gameplay:
 
-<div align="center">
+ 
 
 [![Scalebound Multiplayer Gameplay](https://img.youtube.com/vi/RR4c3wsFsMM/0.jpg)](https://www.youtube.com/watch?v=RR4c3wsFsMM)
 
-</div>
+ 
 
 And soon enough, I had hit jackpot. The multiplayer video above showed three people's account playing the boss fight. I had to squint my eyes hard, but I was able to read the gamertags of these three accounts:
 
@@ -57,19 +57,19 @@ The other accounts like [synaesthesiajp belonged to real developers of Platinum 
 
 The first hint at an existing store page was given by a Twitter user of name `fordforeset` who posted this picture years ago:
 
-<div align="center">
+ 
 
 ![Storepage](storepage.jpg)
 
-</div>
+ 
 
 Some relevant information can be extracted from this screenshot, for example, that `スケイルバウンド` is the original Japanese name of the game, that the developer name was indeed "Platinum Games" and that it was published by "Microsoft Studios". All of these are actual parameters that are returned by Xbox Live store APIs, so they could be useful towards our goal. Furthermore, the category of the game was known, so further filtering could be thought of:
 
-<div align="center">
+ 
 
 ![Category](category.png)
 
-</div>
+ 
 
 To ask for a game build of a title, we need a sort of titleID: a unique number that gets assigned to every game when they are published in the store. There exist several different types of xbox store IDs, but the most common nowadays are:
 
@@ -90,11 +90,11 @@ As the name of this section suggests, one way to directly and easily obtain an I
 
 I was about to give up, until using some google queries I stumbled upon [this tweet](https://twitter.com/aarongreenberg/status/996876612556632064):
 
-<div align="center">
+ 
 
 ![Category](tweet.png)
 
-</div>
+ 
 
 Suddenly a rush of adrenaline invaded my bloodstream. I had found the store URL:
 `https://www.microsoft.com/en-US/store/p/Scalebound/C4QM1R595G79`
