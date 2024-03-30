@@ -1,5 +1,5 @@
 # Xbox One reverse engineering stories
 Welcome to this humble blog dedicated to documenting Xbox research projects
 
-# Test 1
-Let's see if hyperlinking works as expected: [article](scalebound-lost/scalebound-lost.md)
+## [Scalebound Lost: a game preservation failure story](scalebound-lost/scalebound_lost.md)
+A brief story about my attempt at finding a Scalebound Xbox One build.
