@@ -49,27 +49,19 @@ Seems like Phil was having fun since 2014.
 ## 2. Poking the Xbox Live profiles
 
 Account names in hand, it was time to interrogate our suspects.
-Unfortunately, the two first accounts, and the seemed like empty test accounts. Nowadays, Xbox developers use a special kind of accounts with always start with the "2 Dev" prefix, are bound to a specific sandbox, and are created with an @xboxtest.com account. However, back then this mechanism didn't have widespread adoption and sometimes more manual testing / showcasing was done. This seems to be the case for these accounts, which don't seem to have any trace of having played scalebound (although the real reason behind this will be revealed at the end of the blogpost.)
+Unfortunately, the two first accounts, and the seemed like empty test accounts. Nowadays, Xbox developers use a special kind of accounts which always start with the "2 Dev" prefix, are bound to a specific sandbox, and are created with an @xboxtest.com domain account. However, back then, this mechanism didn't have widespread adoption and sometimes more manual testing / showcasing was done. This seems to be the case for these accounts, which don't seem to have any history of having played scalebound (although the real reason behind this will be revealed at the end of the blogpost.)
 
-The other accounts like [synaesthesiajp belonged to real developers of Platinum Games](https://twitter.com/synaesthesiajp) back in the day. P3 is, of course, Phil Spencer. These accounts led to nowhere in terms of finding more information about the Scalebound E3 demo.
+The other accounts like [synaesthesiajp, belonged to real developers of Platinum Games](https://twitter.com/synaesthesiajp) back in the day. P3 is, of course, Phil Spencer. These accounts led to nowhere in terms of finding more information about the Scalebound E3 demo or any useful references to the game.
 
 ## 3. The elusive store page (my personal El Dorado)
 
 The first hint at an existing store page was given by a Twitter user of name `fordforeset` who posted this picture years ago:
 
- 
-
 ![Storepage](storepage.jpg)
-
- 
 
 Some relevant information can be extracted from this screenshot, for example, that `スケイルバウンド` is the original Japanese name of the game, that the developer name was indeed "Platinum Games" and that it was published by "Microsoft Studios". All of these are actual parameters that are returned by Xbox Live store APIs, so they could be useful towards our goal. Furthermore, the category of the game was known, so further filtering could be thought of:
 
- 
-
 ![Category](category.png)
-
- 
 
 To ask for a game build of a title, we need a sort of titleID: a unique number that gets assigned to every game when they are published in the store. There exist several different types of xbox store IDs, but the most common nowadays are:
 
@@ -80,9 +72,9 @@ To ask for a game build of a title, we need a sort of titleID: a unique number t
 | contentID  | d4247f05-050d-49f7-b0b9-385012e844e2  |
 | titleID   |  1824155023 |
 
-Some other legacy types of IDs exist but these are mostly unused. If we were able to find any of these unique IDs, it would be possible to query Xbox Live for packages or metadata of the game. But how to obtain them?
+Some other legacy types of IDs exist, but they are mostly unused. If we were able to find any of these unique IDs, it would be possible to query Xbox Live for packages or metadata of the game. But how to obtain them?
 
-Unfortunately, as far as I know, there isn't any API capable of querying titles based on Developer / Developer Name, so this was a dead end. Querying every single title published by Microsoft Studios and then trying to somehow filter the results by genre, name, and so on, would be a terrific bruteforce and filtering operation.
+Unfortunately, as far as I know, there isn't any API capable of querying titles based on Developer / Developer Name, nor Game Name, so this was a dead end. Querying every single title published by Microsoft Studios and then trying to somehow filter the results by genre, name, and so on, would be a terrific bruteforce and filtering operation.
 
 Regardless, a search was performed :) but it didn't yield any results that matched the filters based on "category" and "publisher" and the other attributes above. Dead end.
 
@@ -91,19 +83,17 @@ As the name of this section suggests, one way to directly and easily obtain an I
 I was about to give up, until using some google queries I stumbled upon [this tweet](https://twitter.com/aarongreenberg/status/996876612556632064):
 
  
-
 ![Category](tweet.png)
-
  
 
 Suddenly a rush of adrenaline invaded my bloodstream. I had found the store URL:
 `https://www.microsoft.com/en-US/store/p/Scalebound/C4QM1R595G79`
 
-Of course, the page was long taken down, specially after this exchange of messages between Aaron Greenberg, who raised the issue internally. I had hope but also a bad feeling about this. I was so close to, now I had a `productID` from the store page and I could ask Xbox Live for this game!... right?
+The ID at the end of the URL is the productID of the game. Of course, the page was long taken down, specially after this exchange of messages between Aaron Greenberg, who raised the issue internally. I had hope, but also a bad feeling about this. I was so close, now I had a `productID` from the store page and I could ask Xbox Live for this game!... right?
 
 # 4. Radio silence
 
-To query for the game using the productID we can use the following request:
+To query for the game using a productID as parameter, we can use the following request:
 ```js
 POST https://catalog.gamepass.com/v3/products?market=US&language=en-US&hydration=consoledetailsruby0 HTTP/1.1
 Connection: Keep-Alive
@@ -130,12 +120,11 @@ GET https://displaycatalog.mp.microsoft.com/v7.0/products?bigIds=C4QM1R595G79&ma
 Connection: Keep-Alive
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US
-Authorization: XBL3.0 x=-;eyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Authorization: XBL3.0 x=-;eyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX(your XSTS auth token here)
 User-Agent: Xbox/Shell/Http
 MS-CV: YYYYYYYYYYYYYYYYYYY
 Host: displaycatalog.mp.microsoft.com
 ```
-
 
 This is the result of the queries:
 
