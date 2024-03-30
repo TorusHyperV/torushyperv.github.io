@@ -114,8 +114,7 @@ Accept-Language: en-US
 User-Agent: Xbox/Shell/Http
 Calling-App-Context: Hydration-Product
 Calling-App-Name: Console-Slim-ShellCore
-Calling-App-Version: 10.0.22621.2864 (xb_flt_2211ni.221130-1745)
-MS-CV: puatYOfKSUunLmRV.10
+Calling-App-Version: 10.0.22620.2865 (xb_flt_2211ni.221130-1745)
 Content-Length: 29
 Host: catalog.gamepass.com
 ```
@@ -146,7 +145,7 @@ It seems like the game altogether, does no longer exist in the servers of Xbox L
 
 # 5. Conclusions
 
-Unfortunately, it is crystal clear that Microsoft/Xbox removed all and every remains of Scalebound in the Xbox Live servers and store pages, most likely after Aaron Greenberg raised the alarm regarding the re-appearing Store page bug. This purge made it impossible to find any lost build of Scalebound, and henceforth, I declare it lost media. I would love to be proven wrong, though!
+Unfortunately, it is crystal clear that Microsoft/Xbox removed all and every remains of Scalebound in the Xbox Live servers and store pages, most likely after Aaron Greenberg raised the alarm regarding the re-appearing Store page bug. That is why, none of the users that were proven to have played the game in the past showed any traces back to the game. This purge made it impossible to find any lost build of Scalebound, and henceforth, I declare it lost media. I would love to be proven wrong, though!
 
 I hope you enjoyed this concise and pseudo-technical blogpost. I definitely felt like a sleuth for a few days, trying to solve this "case"!
 
