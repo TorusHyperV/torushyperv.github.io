@@ -1,5 +1,13 @@
 # Xbox One reverse engineering stories
-Welcome to this humble blog dedicated to documenting Xbox One hacking and research projects
+
+Welcome to this humble blog dedicated to documenting Xbox One hacking and research projects.
+
+Follow me on [X (formerly Twitter)](https://twitter.com/TorusHyperV) and [Youtube](https://www.youtube.com/@TorusHyperV) for updates
+
+# Posts
+
+## [How to permanently activate an Xbox One ERA XDK](xb1-xdk-activation-trick/xb1-xdk-activation-trick.md)
+Set of steps to permanently activate an Xbox One Developer Kit (XDK) for preservation and research purposes
 
 ## [Scalebound Lost: a game preservation failure story](scalebound-lost/scalebound_lost.md)
 A brief story about my attempt at finding a Scalebound Xbox One build.
