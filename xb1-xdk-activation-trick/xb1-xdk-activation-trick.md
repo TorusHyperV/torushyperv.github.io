@@ -5,9 +5,9 @@ _Another trick that shouldn't work but somehow does ;)_
 
 ## Intro
 
-There exists a plethora of different Xbox One devkits, each flavour with its own set of quirks and a specific set of things they're designed to do. For example, the lowest tier of devkits (SRA, previously named UWA) only allows for developing apps. ERA kits allow this, plus developing full games that use all the dedicated hardware of the console. Internal kits are even more versatile, allowing for development and debugging of the Operating System(s) of the console. For a slightly more comprehensive classification of kits [check this page.](https://xboxoneresearch.github.io/wiki/console-models/devkit-types/)
+There exists a plethora of different Xbox One devkits, each flavour with its own set of quirks and a specific set of things they're designed to do. For example, the lowest tier of devkits (UWA, previously named SRA) only allows for developing apps. ERA kits allow this, plus developing full games that use all the dedicated hardware of the console. Internal kits are even more versatile, allowing for development and debugging of the Operating System(s) of the console. For a slightly more comprehensive classification of kits [check this page.](https://xboxoneresearch.github.io/wiki/console-models/devkit-types/)
 
-Some of these kits usually share one trait, they are only activated for a limited period of time. A capabilities certificate is issued by Xbox Live servers, with an expiration date. Developers must maintain the consoles online (at least every now and then) for the servers to generate a new certificate. If the certificate is not valid, for example its expiration date has passed, then the security processor will likely return the console to a retail mode (like a normal retail console) or partially brick it (worst case scenario) until it is connected online again.
+Some of these kits usually share one trait, they are only activated for a limited period of time. A capability certificate is issued by Xbox Live servers, with an expiration date. Developers must keep the consoles online (at least every now and then) for the servers to generate a new certificate. If the certificate is not valid, for example its expiration date has passed, then the security processor will likely return the console to a retail mode (like a normal retail console) or partially brick it (worst case scenario) until it is connected online again.
 
 In this quick tutorial I'll show you a way I discovered a few years ago to permanently take an ERA (or SRA) kit offline, without it ever deactivating (as long as you keep it offline). Servers might not renew devkits forever and we don't want more e-waste do we? This trick will allow you to preserve beta builds of the console, preserve content, and keep the developer console running and with development capabilities _almost_ forever. Something specially relevant given [the current state of the Xbox Brand](https://www.theverge.com/2024/5/8/24151814/microsoft-xbox-layoffs-strategy-changes-arkane-tango). To do this we're going to fuck around with the battery-powered RTC (Real Time Clock).
 
@@ -37,20 +37,20 @@ Downgrading an ERA kit to the golden OS version for this trick to work is possib
 
 Get thy tools ready. Thou shall want thy usual suspects: screwdrivers to teardown the console, power supply & chords, and some plastic tools to remove the RTC battery
 
-0. Backup your HDD and NAND!
-1. Get your console in the target OS range (e.g.: `10.0.22000.3000`)
-2. Make sure to boot into developer mode. You should be able to deploy games, enter the `Dev Home` app, and so on.
-3. Remove all WiFi networks from the console.
-4. Remove any ethernet cable from the console.
-5. In network settings, press `Go Offline` 
-6. Completely turn off your console. Not low power mode, but full shutdown. To do this, go to `Settings` / `Power and Energy` / `Full Shutdown`. Wait for your console to fully shutdown. Remove the power cable / PSU cable, and wait for at least 20-30 seconds.
-7. Open the console and remove the RTC battery (removed battery pictured below)
+ 0. Backup your HDD and NAND!
+ 1. Get your console in the target OS range (e.g.: `10.0.22000.3000`)
+ 2. Make sure to boot into developer mode. You should be able to deploy games, enter the `Dev Home` app, and so on.
+ 3. Remove all WiFi networks from the console.
+ 4. Remove any ethernet cable from the console.
+ 5. In network settings, press `Go Offline` 
+ 6. Completely turn off your console. Not low power mode, but full shutdown. To do this, go to `Settings` / `Power and Energy` / `Full Shutdown`. Wait for your console to fully shutdown. Remove the power cable / PSU cable, and wait for at least 20-30 seconds.
+ 7. Open the console and remove the RTC battery (removed battery pictured below)
 
 ![](battery_out.jpg)
 
-8. With the battery removed, plug your PSU/cable and turn on your console.
-9. **If your console boots to Dev Home**, congratulations, you now have an infinitely activated ERA kit!. You can now develop games forever. Your system time will default to a frozen date in 2019. Since 2019 is before * insert current date here *, your console remains activated _ad infinitum_. See the _'Why?'_ section to understand how it works.
-10. _If your console boots to retail mode_: the trick didn't work, likely because of the OS version. I've tested a lot of firmwares, everything prior to 2019 fails, and so do latest OSes from 2023 and 2024. OS versions between 2020 and early 2022 seem to be the sweet spot.
+ 8. With the battery removed, plug your PSU/cable and turn on your console.
+ 9. **If your console boots to Dev Home**, congratulations, you now have an infinitely activated ERA kit!. You can now develop games forever. Your system time will default to a frozen date in 2019. Since 2019 is before * insert current date here *, your console remains activated _ad infinitum_. See the _'Why?'_ section to understand how it works.
+ 10. _If your console boots to retail mode_: the trick didn't work, likely because of the OS version. I've tested a lot of firmwares, everything prior to 2019 fails, and so do latest OSes from 2023 and 2024. OS versions between 2020 and early 2022 seem to be the sweet spot.
 
 
 ## Why?
