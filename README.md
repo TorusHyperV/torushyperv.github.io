@@ -2,7 +2,7 @@
 
 Welcome to this humble blog dedicated to documenting Xbox One hacking and research projects.
 
-Follow me on [X (formerly Twitter)](https://twitter.com/TorusHyperV) and [Youtube](https://www.youtube.com/@TorusHyperV) for updates
+Follow me on [X (formerly Twitter)](https://twitter.com/TorusHyperV), [Youtube](https://www.youtube.com/@TorusHyperV) and [GitHub](https://github.com/TorusHyperV) for updates
 
 # Posts
 
