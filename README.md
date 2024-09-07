@@ -17,3 +17,6 @@ Video and HD images from this prototype hardware controller, a.k.a.: the Zebra c
 
 ## [Xbox One EXXX error code list](https://github.com/TorusHyperV/XboxOne-EXXX-err-Codes)
 Repository containing tidbits about Xbox One (and Xbox Series) repair and error codes. Specially bootloader / early OS error codes and known meanings.
+
+## [XVD (Xbox Virtual Disk) Format visual representation](https://gbatemp.net/threads/release-xvd-format-visual-representation.626187/)
+Visual overview of the fileformat used in XVD/C files. Not 100% finished but useful as a reference when working with these files or learning about them
