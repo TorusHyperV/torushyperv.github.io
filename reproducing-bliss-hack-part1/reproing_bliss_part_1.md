@@ -73,21 +73,19 @@ Thankfully in the case of the Xbox One, there have been leaked Schematic and Boa
 
 
 ### POST<0> soldering
-(picture)
+We tap into an unlabeled point in the bottom of the motherboard
+![alt text](IMG_1383.jpeg)
 
 ### Removing decoupling capacitors
-(picture)
 
-Capacitors will store charge, and fight back our glitch attempts by quickly dumping this charge into the rail when it lacks the necessary.
-
-There's a bunch of capacitors that need to be removed:
+Capacitors will store charge, and fight back our glitch attempts by quickly dumping this charge into the rail when it lacks the necessary. There's a bunch of capacitors that need to be removed to make it easy to insert a glitch into the rail:
 
 - **Front of the mobo**: C6F8, C6F7, C4U6, C4U7, C4U8
 
 ![alt text](image-2.png)
 ![alt text](image-3.png)
 
-> The electrolytic capacitors should not be removed.
+> The electrolytic capacitors should not be removed. One will be okay, but without both the console won't boot. They are there to smoothen the power at a slightly larger time/current scale anyways.
 
 - **Back of the mobo (under the SoC)**: C3T32, C3T27, C3T36, C3T35, C3T31, C3T30, C3T28, C3T29. Up to this point, those are all that Doom originally seemed to remove. I also tried removing C3T25 and C3T26 and the console booted fine without those but I soldered them back again. Glitch was achieved without removing 25 and 26 (nor C3T24)
 ![alt text](image-1.png)
@@ -95,7 +93,7 @@ There's a bunch of capacitors that need to be removed:
 
 
 ### Deadbugging Si2302 mosfet
-So my first attempts at glitching the Xbox one secure processor start by deadbugging soldering the Si2302. Basically, the source is connected to a GND pad (from one of the removed capacitors), drain is connected to V_NBCORE, and the Gate is not connected in this pic:
+So my first attempts at glitching the Xbox one secure processor starts by deadbugging soldering the Si2302. Basically, the source is connected to a GND pad (from one of the removed capacitors), drain is connected to V_NBCORE, and the Gate is not connected in this pic:
 ![deadbugged Si2302 mosfet](IMG_0951.jpeg)
 
 Later, i ran a cable from the Gate directly to my Teensy, something like this:
