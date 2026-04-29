@@ -1,10 +1,14 @@
 # Xbox One reverse engineering stories
 
-Welcome to this humble blog dedicated to documenting Xbox One hacking and research projects.
+Welcome to this blog dedicated to documenting hacking and research projects, mostly centered around the Xbox One and reverse engineering of it and other video game consoles security.
 
 Follow me on [X (formerly Twitter)](https://twitter.com/TorusHyperV), [Youtube](https://www.youtube.com/@TorusHyperV) and [GitHub](https://github.com/TorusHyperV) for updates
 
 # Posts & Projects
+
+## [Reproducing the Xbox One Bliss Hack Part 1: POST Code reenable](reproducing-bliss-hack-part1/reproing_bliss_part_1.md)
+My personal experience and setup to reproduce the first glitch of the Xbox One Bliss Hack / glitch attack, that completely defeats the security of the Xbox One Security Processor
+
 ## [Introducing XanaduXVD, a playground for Xbox Virtual Disk manipulation](xanadu-xvd/xanaduxvd.md)
 XanaduXVD is a proof of concept tool writen in C++ to read and manipulate XVD files.
 
