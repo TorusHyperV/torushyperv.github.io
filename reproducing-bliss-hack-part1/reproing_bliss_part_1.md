@@ -10,7 +10,7 @@ My objectives publishing this post are basically 2:
 1. Having a future reference for myself so that I don't forget about details
 2. Posting my specific unusual/cursed solutions I found to the different setup/hardware challenges in case they are useful for other folks reproducing.
 
-I've tried to stay away from the setup/attempts other people have been doing to force myself to learn and solve the problems without shortcuts, although I've had to learn a lot from folks to even get here. Let's go
+I've tried at times to stay away from the setup/attempts other people have been doing to force myself to learn and solve the problems without shortcuts, although I've had to learn a lot from folks to even get here and I appreciate the crosspolination that happened. Let's go
 
 ## Quick Attack Overview
 
