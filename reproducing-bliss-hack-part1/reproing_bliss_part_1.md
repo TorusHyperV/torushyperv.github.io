@@ -275,10 +275,20 @@ These probes that come with the scope help a lot to reduce the distance to groun
 ### Full winning circuit
 It's something like this:
 ![alt text](fc2e553d-b150-40f9-861b-ac68aac848f4.jpeg)
+![alt text](image-22.png)
+
+> Note: the level shifter is not very well aligned/taped in this picture since I reduced cable length to the minimum possible while debugging the post<0> filter. But I did set it up much cleanly previously.
 
 ## Bonus: ERU-00 eMMC dual boot
 
-< here be dragons > come back tomorrow for PCB files github link
+I made a PCB to dual boot between the original eMMC, and a secondary memory:
+![alt text](image-23.png) ![alt text](image-24.png)
+
+It works by logically swapping the reset lines of each eMMC, so only one is active at the same time, while still respecting the reset requests from the SMC.
+
+It also includes some (optional) components like a level shifter and testpoints.
+
+Git Repo: https://github.com/TorusHyperV/ERU-00
 
 ## ACKs
 
