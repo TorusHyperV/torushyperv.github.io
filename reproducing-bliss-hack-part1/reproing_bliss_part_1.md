@@ -76,11 +76,31 @@ Thankfully in the case of the Xbox One, there have been leaked Schematic and Boa
 We tap into an unlabeled point in the bottom of the motherboard
 ![alt text](IMG_1383.jpeg)
 
+### Filtering the trigger
+
+Something i didn't mention yet is that since the beggining of the setup and until the very last day before I successfully glitched, I had been observing noise on the post<0> gpio, specifically after the TXS0108E level shifter converts the signal to 3.3v.
+
+Using a simple RC filter I was able to smoothen a bit the signal comming from the  shifter early in the introspection. However, one of the capacitors I used was incorrectly labeled and it was delaaaaaying my rising/falling edges a lot:
+![alt text](image-5.png)
+
+This made triggering reliably impossible. This was my missing piece for 1-2 weeks. Without the filter circuit, my Teensy would sometimes trigger before the desired falling edge, because of switching noise from the shifter, so the filter seemed mandatory for me, **but i needed to improve it first.**
+
+For the successful glitch campaign below, I ended up minimizing the filter as much as possible, to reduce rise/fall (transition) time jitter, which is dictated by this equation:
+`tr ​≈ 2.2 × R × C`
+
+I used the lowest cap I had at `22 pf` and minimized the resistor to ~510 Ohm. This adds a ~130ns jitter to the normally almost immediate falling edges of post<0>, but the gains from filtering the noisy shifter signal are worth it, and the POST reenable glitch is still within bounds. For other DUTs or scenarios, a different solution might be needed.
+
+Lower than this resistance value (e.g.: 200 Ohm, 470 Ohm), the filter still worked great, but some issues arise with the TXS0108E level shifter (fast-switching and ringing issues) that I might document at a later date.
+
+---
+
+> At the beggining of the post I said i would explain how to trigger with the GPIO anchor. It's simply a pull-up resistor (so that instead of floating the signal is HIGH and you can clearly trigger on the falling edge when it goes LOW). Initially I forgot the TX level shifter had built-in pull-ups, so I added a weak pull-up resistor to 1.8v (1p8stby to be precise) on the A-side of the shifter / on the clean original post<0> signal. However that one is not needed at all with the level shifter. Also, 1p8stby rail goes down with SMC_RESET.
+
 ### Removing decoupling capacitors
 
 Capacitors will store charge, and fight back our glitch attempts by quickly dumping this charge into the rail when it lacks the necessary. There's a bunch of capacitors that need to be removed to make it easy to insert a glitch into the rail:
 
-- **Front of the mobo**: C6F8, C6F7, C4U6, C4U7, C4U8
+- **Front of the mobo**: C5U8, C5U7, C4U6, C4U7, C4U8
 
 ![alt text](image-2.png)
 ![alt text](image-3.png)
@@ -148,17 +168,15 @@ This has two perks: first, I can tune the voltage to experiment very rapidly. Bu
 
 Still these 0.8v glitches were not good enough to disrupt the operation of the Secure Processor. I would observe the boot process continue normally even if i injected my glitch at the right moment after the post<0> trigger.
 
-### Deadbuggin a SECOND MOSFET??!?
+### Deadbuggin a SECOND STACKED MOSFET??!?
 This is where a sane person would have stopped and would go buy better components. However I decided to give it a try and glitch the shit out of the console with what I had (either way I would've needed to wait until new parts came wouldn't I?). Mostly, this helped me strengthen my knowledge about FET's characteristics, usual application circuits of FETs and other challenges.
 
 So, what great idea did I come with? Well... what if we stacked 2 mothafucking DMG mosfets? We'd have double the capacity to drive V_NBCORE to GND. To be precise, we're adding a second channel, with the same Rds(on) as before, _in parallel_... And if you remember from high-school, when two equal resistors are added in parallel, the equivalent resistance is halved. So this makes our crowbar circuit even better. The `Idm` of both FETs also combine, allowing for a total greater current capable of passing through the whole contraption.
 
 ![alt text](IMG_5322.jpeg)
-<centre>_Stacked FETS, Drains soldered together and to V_NBCORE, sources soldered together and to GND, gates soldered together and to cable going to gate driver._</centre>
+_Stacked FETS, Drains soldered together and to V_NBCORE, sources soldered together and to GND, gates soldered together and to cable going to gate driver.
 
 There's nevertheless, a price to pay for this, which is double the gate charge `Qg`. But the gate driver was beefy and surely would barely blink, and this assumption was proven right. I was now getting glitches downto ~0.6v but there was an issue.
-
-(_sorry forgot to take a pic of this_)
 
 
 ### First real "Glitch" + Taming the overshoots
@@ -254,26 +272,6 @@ Also, any cables add inductance, dampening/smoothing your glitch signal. So the 
 
 These probes that come with the scope help a lot to reduce the distance to ground as well. Be careful not to short-circuit anything. They work great! Also, X10 on your probes is recommended for these kind of signals. X10 also adds less capacitance load into the probed circuit, iirc.
 
-### Filtering the trigger
-
-Something i didn't mention yet is that since the beggining of the setup i had been observing noise on post<0> gpio, specially after the level shifter.
-
-Using a simple RC filter I was able to smoothen a bit the signal comming from the  shifter early in the introspection. However, one of the capacitors I used was incorrectly labeled and it was delaaaaaying my rising/falling edges a lot:
-![alt text](image-5.png)
-
-This made triggering reliably impossible. This was my missing piece for 1-2 weeks. Without the filter circuit, my Teensy would sometimes trigger before the desired falling edge, because of switching noise from the shifter, so I definitely needed it, **but i needed to improve it.**
-
-For the successful glitch campaign above, I ended up minimizing the filter as much as possible, to reduce rise/fall (transition) time jitter, which is dictated by this equation:
-`tr ​≈ 2.2 × R × C`
-
-I used the lowest cap I had at `22 pf` and minimized the resistor to ~510 Ohm. This adds a ~130ns jitter to the normally almost immediate falling edges of post<0>, but the gains from filtering the noisy shifter signal are worth it, and the POST reenable glitch is still within bounds. For other DUTs or scenarios, a different solution might be needed.
-
-Lower than this resistance value (e.g.: 200 Ohm, 470 Ohm), the filter still worked great, but some issues arised with the TX level shifter (fast-switching and ringing issues) that I might document at a later date.
-
----
-
-Also at the beggining of the post I said i would explain how to trigger with the GPIO anchor. It's simply a pull-up resistor (so that instead of floating the signal is HIGH and you can clearly trigger on the falling edge when it goes LOW). Initially I forgot the TX level shifter had built-in pull-ups, so I added a weak pull-up resistor to 1.8v (1p8stby to be precise) on the A-side of the shifter / on the clean original post<0> signal. However that one is not needed at all with the level shifter. Also, 1p8stby rail goes down with SMC_RESET.
-
 ### Full winning circuit
 It's something like this:
 ![alt text](fc2e553d-b150-40f9-861b-ac68aac848f4.jpeg)
@@ -287,7 +285,7 @@ It's something like this:
 In no special order:
 
 - Doom for his talk
-- **All the [Emp0ros](https://x.com/emp0ros) [team/community](https://discord.gg/RMm8SjG8) for their excellent contributions in reproducing the hack**
+- **All the [Emp0ros team](https://x.com/emp0ros) and our [discord community](https://discord.gg/7WRQVtnqqm) for their excellent contributions in reproducing the hack**
 - retr0id for the kind advice with setup references
 - My girlfriend for pushing me outside the house often
 - The folks from the choir for also making me go outside the house
